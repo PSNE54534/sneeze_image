@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>画像ガチャ（連番方式）</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: sans-serif;
+    }
+    #imageFrame {
+      width: 300px;
+      height: 300px;
+      margin: 20px auto;
+      position: relative;
+    }
+    #randomImage {
+      max-width: 100%;
+      max-height: 100%;
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>画像ガチャ（連番）</h1>
+  <button id="gachaButton">ガチャ</button>
+  <div id="imageFrame">
+    <img id="randomImage" src="" alt="ガチャ結果">
+  </div>
+
+  <script>
+    // 画像の総数（最大番号）をここで管理する
+    // 例: 1000枚あるなら「1000」にする
+    const TOTAL_IMAGES = 3;
+
+    // DOM要素を取得
+    const gachaButton = document.getElementById("gachaButton");
+    const randomImage = document.getElementById("randomImage");
+
+    // ガチャボタンをクリックしたときの処理
+    gachaButton.addEventListener("click", () => {
+      // 1 ～ TOTAL_IMAGESの範囲でランダムな整数を生成
+      const randomIndex = Math.floor(Math.random() * TOTAL_IMAGES) + 1;
+      // 連番に対応するファイル名を組み立て
+      // (例: images/image1.jpg, images/image2.jpg, ...)
+      const imagePath = `images/image${randomIndex}.jpg`;
+
+      // 画像表示用のsrcにセット
+      randomImage.src = imagePath;
+      randomImage.style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
